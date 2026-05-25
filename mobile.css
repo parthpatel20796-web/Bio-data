@@ -1,0 +1,74 @@
+@media (max-width: 600px) {
+  body {
+    align-items: flex-start;
+    padding: 30px 12px 118px !important;
+  }
+
+  #particles-canvas {
+    opacity: 0.95;
+  }
+
+  .control-panel {
+    bottom: 10px !important;
+    left: 10px !important;
+    right: 10px !important;
+    width: auto !important;
+    transform: none !important;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    gap: 8px;
+    border-radius: 22px;
+    padding: 9px 10px !important;
+  }
+
+  .theme-selector,
+  .lang-selector {
+    border-right: 0;
+    padding-right: 0 !important;
+  }
+
+  .control-panel button {
+    min-height: 36px;
+    padding: 8px 11px;
+    font-size: 0.72rem;
+  }
+
+  .biodata-container {
+    margin-top: 0;
+    background: rgba(13, 19, 31, 0.78);
+    border-color: rgba(226, 184, 87, 0.38);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.5), 0 0 34px rgba(226, 184, 87, 0.09);
+  }
+
+  body.theme-linen .biodata-container {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  body.theme-blush .biodata-container {
+    background: rgba(43, 27, 53, 0.78);
+  }
+
+  .career-timeline {
+    gap: 18px;
+    padding-left: 16px;
+  }
+
+  .timeline-item::before {
+    left: -23px;
+  }
+
+  .duty-list {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    gap: 6px;
+  }
+
+  .detail-value,
+  .paragraph-desc {
+    font-size: 0.86rem;
+  }
+
+  .section-title {
+    font-size: 1.16rem;
+  }
+}
