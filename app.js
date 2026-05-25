@@ -112,13 +112,13 @@ function setTheme(theme) {
   const activeDot = document.querySelector(`.dot-${theme}`);
   if (activeDot) activeDot.classList.add('active');
   currentTheme = theme;
-  localStorage.setItem('marriage_biodata_theme', theme);
+  if (ownerAccess()) localStorage.setItem('marriage_biodata_theme', theme);
 }
 
 function setLanguage(lang) {
   if (isEditing) saveToStorage();
   currentLang = labels[lang] ? lang : 'en';
-  localStorage.setItem('marriage_biodata_lang', currentLang);
+  if (ownerAccess()) localStorage.setItem('marriage_biodata_lang', currentLang);
   document.querySelectorAll('.lang-btn').forEach((btn) => btn.classList.toggle('active', btn.id === `lang-${currentLang}`));
   applyUILabels();
 }
@@ -264,14 +264,21 @@ function initParticles() {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.dataset.owner = hasOwnerAccess() ? 'true' : 'false';
+  const owner = ownerAccess();
   const editButton = document.getElementById('edit-btn');
-  if (editButton && !ownerAccess()) editButton.style.display = 'none';
-  if (!ownerAccess()) document.querySelectorAll('[data-key]').forEach((el) => el.setAttribute('contenteditable', 'false'));
 
-  loadFromStorage();
-  setTheme(localStorage.getItem('marriage_biodata_theme') || 'slate');
-  setLanguage(localStorage.getItem('marriage_biodata_lang') || 'en');
-  loadPhotoFromStorage();
+  if (!owner) {
+    if (editButton) editButton.style.display = 'none';
+    document.querySelectorAll('[data-key]').forEach((el) => el.setAttribute('contenteditable', 'false'));
+    setTheme('slate');
+    setLanguage('en');
+  } else {
+    loadFromStorage();
+    setTheme(localStorage.getItem('marriage_biodata_theme') || 'slate');
+    setLanguage(localStorage.getItem('marriage_biodata_lang') || 'en');
+    loadPhotoFromStorage();
+  }
+
   initParticles();
 
   document.addEventListener('input', (event) => {
